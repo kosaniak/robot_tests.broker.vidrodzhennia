@@ -533,11 +533,11 @@ Login
   Reload Page
 
 Змінити документ в ставці
-  [Arguments]  ${username}  ${file}  ${bid_id}
+  [Arguments]  ${username}  ${tender_uaid}  ${filepath}  ${docid}
   Reload Page
   Wait Until Page Contains Element  xpath=(//*[@id='btn_documents_add' and not(contains(@style,'display: none'))]) 
   Click Element  css=.bt_ReUpload:first-child
-  Choose File  xpath=(//*[@id='upload_form']/input[2])  ${file}
+  Choose File  xpath=(//*[@id='upload_form']/input[2])  ${filepath}
   Sleep  2
   Click Element  id=upload_button
   Wait Until Element Contains  id=tFileMessage  Файл завантажено 
