@@ -245,7 +245,13 @@ Login
 Отримати інформацію із предмету
   [Arguments]  ${username}  ${tender_uaid}  ${item_id}  ${field_name}
   ${return_value}=      Run Keyword If   '${field_name}' == 'description'
-  ...     Get Text    xpath=(//div[starts-with(@id, 'pn_w_item') and contains(@class, '${item_id}')////span[contains(@id, 'description')]) 
+  ...  Get Text    xpath=(//div[starts-with(@id, 'pn_w_item') and contains(@class, '${item_id}')////span[contains(@id, 'description')]) 
+  ...  ELSE IF  '${field_name}' == 'classification.scheme'  Get Text  xpath=(//div[starts-with(@id, 'pn_w_item') and contains(@class, '${item_id}')////span[contains(@id, 'classification_scheme')]) 
+  ...  ELSE IF  '${field_name}' == 'classification.id'  Get Text  xpath=(//div[starts-with(@id, 'pn_w_item') and contains(@class, '${item_id}')////span[contains(@id, 'classification_id')]) 
+  ...  ELSE IF  '${field_name}' == 'classification.description'  Get Text  xpath=(//div[starts-with(@id, 'pn_w_item') and contains(@class, '${item_id}')////span[contains(@id, 'classification_description')]) 
+  ...  ELSE IF  '${field_name}' == 'unit.name'  Get Text  xpath=(//div[starts-with(@id, 'pn_w_item') and contains(@class, '${item_id}')////span[contains(@id, 'unit_name') and contains(@id, 'tslw_item')]) 
+  ...  ELSE IF  '${field_name}' == 'unit.code'  Get Text  xpath=(//div[starts-with(@id, 'pn_w_item') and contains(@class, '${item_id}')////span[contains(@id, 'unit_code') and contains(@id, 'tw_item')]) 
+  ...  ELSE IF  '${field_name}' == 'quantity'  Get Text  xpath=(//div[starts-with(@id, 'pn_w_item') and contains(@class, '${item_id}')////span[contains(@id, 'quantity')]) 
   [return]  ${return_value}
 
 Отримати інформацію із тендера
@@ -557,14 +563,14 @@ Login
   Click Element  id=bids_ref
 
 Отримати посилання на аукціон для глядача
-  [Arguments]  ${username}  
+  [Arguments]  ${username}  @{arguments}
   Switch Browser  ${username}
   Wait Until Page Contains Element  xpath=(//*[@id='aPosition_auctionUrl' and not(contains(@style,'display: none'))])
   ${result} =  Get Text  id=aPosition_auctionUrl
   [return]  ${result}
 
 Отримати посилання на аукціон для учасника
-  [Arguments]  ${username}  
+  [Arguments]  ${username}  @{arguments}
   Switch Browser  ${username}
   Wait Until Page Contains Element  xpath=(//*[@id='aPosition_auctionUrl' and not(contains(@style,'display: none'))])
   ${result}=  Get Text  id=aPosition_auctionUrl
