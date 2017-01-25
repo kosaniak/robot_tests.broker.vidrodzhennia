@@ -563,14 +563,14 @@ Login
   Click Element  id=bids_ref
 
 Отримати посилання на аукціон для глядача
-  [Arguments]  ${username}  @{arguments}
+  [Arguments]  ${username}  ${tender_uaid}
   Switch Browser  ${username}
   Wait Until Page Contains Element  xpath=(//*[@id='aPosition_auctionUrl' and not(contains(@style,'display: none'))])
   ${result} =  Get Text  id=aPosition_auctionUrl
   [return]  ${result}
 
 Отримати посилання на аукціон для учасника
-  [Arguments]  ${username}  @{arguments}
+  [Arguments]  ${username}  ${tender_uaid}
   Switch Browser  ${username}
   Wait Until Page Contains Element  xpath=(//*[@id='aPosition_auctionUrl' and not(contains(@style,'display: none'))])
   ${result}=  Get Text  id=aPosition_auctionUrl
